@@ -9,6 +9,7 @@ public class HomeCadastro {
     //  Variaveis com nomes maiusculos não sofrem alterações
     String REGISTRAR = "//*[@id='__next']/div/div[2]/div/div[1]/form/div[3]/button[2]";
     String EMAIL = "//*[@id='__next']/div/div[2]/div/div[2]/form/div[2]/input";
+
     String NOME = "//body/div[@id='__next']/div[1]/div[2]/div[1]/div[2]/form[1]/div[3]/input[1]";
     String SENHA = "//*[@id='__next']/div/div[2]/div/div[2]/form/div[4]/div/input";
     String CONFIRMAR_SENHA = "//*[@id='__next']/div/div[2]/div/div[2]/form/div[5]/div/input";
@@ -21,17 +22,17 @@ public class HomeCadastro {
     public void regitrar(){
         driver.findElement(By.xpath(REGISTRAR)).click();
     }
-     public void preencherEmail(){
-        driver.findElement(By.xpath(EMAIL)).sendKeys("roberto@gmail.com");
+     public void preencherEmail(String email){
+        driver.findElement(By.xpath(EMAIL)).sendKeys(email);
      }
-     public void preencherNome(){
-        driver.findElement(By.xpath(NOME)).sendKeys("Roberto Matias");
+     public void preencherNome(String nome){
+        driver.findElement(By.xpath(NOME)).sendKeys(nome);
      }
-     public void preencherSenha(){
-        driver.findElement(By.xpath(SENHA)).sendKeys("123456");
+     public void preencherSenha(String senha){
+        driver.findElement(By.xpath(SENHA)).sendKeys(senha);
      }
-     public void preencherConfirmarSenha(){
-         driver.findElement(By.xpath(CONFIRMAR_SENHA)).sendKeys("123456");
+     public void preencherConfirmarSenha(String confirmarSenha){
+         driver.findElement(By.xpath(CONFIRMAR_SENHA)).sendKeys(confirmarSenha);
      }
      public void clicarCriarContaComSaldo(){
          driver.findElement(By.xpath(CRIAR_SALDO)).click();

@@ -7,8 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
+/*
+ - Os campos Nome, Email, Senha e Confirmação de senha são de prenchimento obrigatório
+ - Erro: Nome não pode ser vazio
+* */
 
 public class TestCadastroNovoUsuario {
     WebDriver driver;
@@ -23,21 +26,35 @@ public class TestCadastroNovoUsuario {
     }
 
     @Test
-    public void cadastro(){
+    public void testeCadastro(){
         homeCadastro.regitrar();
-        homeCadastro.preencherEmail();
-        homeCadastro.preencherNome();
-        homeCadastro.preencherSenha();
-        homeCadastro.preencherConfirmarSenha();
+        homeCadastro.preencherEmail("roberto@gmail.com");
+        homeCadastro.preencherNome("Roberto Matias");
+        homeCadastro.preencherSenha("123456");
+        homeCadastro.preencherConfirmarSenha("123456");
         homeCadastro.clicarCriarContaComSaldo();
         homeCadastro.clicarCadastrar();
-        Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
+        validarMensagem("foi criada com sucesso");
+    }
+    @Test
+    public void testeCadastroVazio(){
+        homeCadastro.regitrar();
+        homeCadastro.preencherEmail("roberto@gmail.com");
+        homeCadastro.preencherSenha("123456");
+        homeCadastro.preencherConfirmarSenha("123456");
+        homeCadastro.clicarCriarContaComSaldo();
+        homeCadastro.clicarCadastrar();
+        validarMensagem("Nome não pode ser vazio");
+
     }
 
     @After
     public void finalizar() throws InterruptedException {
         Thread.sleep(5000);
         driver.quit();
+    }
+    public void validarMensagem(String msg){
+        Assert.assertTrue(driver.getPageSource().contains(msg));
     }
 
 }
